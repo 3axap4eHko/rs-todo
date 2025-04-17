@@ -16,6 +16,15 @@ async fn list_todos(data: web::Data<AppState>) -> Result<HttpResponse, TodoError
     Ok(HttpResponse::Ok().json(todos))
 }
 
+#[get("/todos/{id}")]
+async fn get_todo(
+    data: web::Data<AppState>,
+    id: web::Path<TodoId>,
+) -> Result<HttpResponse, TodoError> {
+    let todo = data.service.get_todo(*id).await?;
+    Ok(HttpResponse::Ok().json(todo))
+}
+
 #[post("/todos")]
 async fn add_todo(
     data: web::Data<AppState>,
@@ -46,6 +55,7 @@ async fn delete_todo(
 
 pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.service(list_todos)
+        .service(get_todo)
         .service(add_todo)
         .service(update_todo)
         .service(delete_todo);

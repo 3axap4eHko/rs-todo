@@ -73,6 +73,12 @@ Run the full test suite:
 cargo test
 ```
 
+## API smoke‑tests (`api.sh`)
+
+The `api.sh` script uses `atac` to exercise all endpoints and verify only status codes without printing response bodies.  
+`atac` will automatically capture the `id` field from the **last** created todo response, and substitute it into any subsequent requests that reference `{{TODO_ID}}`.
+
+
 ## Logging
 
 By default, logs are printed at the level specified by the `LOG_LEVEL` environment variable. For example:

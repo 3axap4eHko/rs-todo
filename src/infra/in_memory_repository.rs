@@ -27,6 +27,12 @@ impl TodoRepository for InMemoryTodoRepository {
         guard.values().cloned().collect()
     }
 
+    async fn get(&self, id: TodoId) -> Option<Todo> {
+        let guard = self.store.read().await;
+        // should be cloned
+        guard.get(&id).cloned()
+    }
+
     async fn create(&self, input: TodoInput) -> Todo {
         let mut guard = self.store.write().await;
         let todo: Todo = input.into();

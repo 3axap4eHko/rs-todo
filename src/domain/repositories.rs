@@ -8,6 +8,7 @@ use crate::domain::{
 #[async_trait]
 pub trait TodoRepository: Send + Sync {
     async fn list(&self) -> Vec<Todo>;
+    async fn get(&self, id: TodoId) -> Option<Todo>;
     async fn create(&self, todo: TodoInput) -> Todo;
     async fn update(&self, id: TodoId, todo: TodoInput) -> Option<Todo>;
     async fn delete(&self, id: TodoId) -> Option<Todo>;

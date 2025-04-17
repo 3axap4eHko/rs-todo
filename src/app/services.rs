@@ -20,6 +20,10 @@ impl TodoService {
         self.repo.list().await
     }
 
+    pub async fn get_todo(&self, id: TodoId) -> Result<Todo, TodoError> {
+        self.repo.get(id).await.ok_or(TodoError::NotFound)
+    }
+
     pub async fn add_todo(&self, todo: TodoInput) -> Todo {
         self.repo.create(todo).await
     }
