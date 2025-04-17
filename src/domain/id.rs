@@ -7,6 +7,12 @@ use uuid::Uuid;
 #[serde(transparent)]
 pub struct TodoId(Uuid);
 
+impl Default for TodoId {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TodoId {
     /// Generate a fresh identifier.
     pub fn new() -> Self {

@@ -12,6 +12,12 @@ pub struct InMemoryTodoRepository {
     store: RwLock<HashMap<TodoId, Todo>>,
 }
 
+impl Default for InMemoryTodoRepository {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl InMemoryTodoRepository {
     pub fn new() -> Self {
         Self {
