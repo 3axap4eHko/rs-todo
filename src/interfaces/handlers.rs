@@ -73,8 +73,8 @@ mod tests {
 
     pub fn init(cfg: &mut web::ServiceConfig) {
         let repo = Arc::new(InMemoryTodoRepository::new());
-        let svc = Arc::new(TodoService::new(repo));
-        let state = web::Data::new(AppState { service: svc });
+        let service = Arc::new(TodoService::new(repo));
+        let state = web::Data::new(AppState { service });
 
         cfg.app_data(state.clone());
     }
